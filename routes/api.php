@@ -11,7 +11,7 @@ Route::middleware('auth:sanctum')->controller(\App\Http\Controllers\TodoControll
     Route::get('list', 'list');
     Route::get('show/{id}', 'show');
     Route::put('update/{id}', 'update');
-    Route::patch('toggle-done/{id}', 'toggleDone');
+    Route::patch('change-done/{id}', 'changeDone');
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

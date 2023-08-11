@@ -75,8 +75,12 @@ class TodoController extends Controller
         return response()->json(['status' => $result]);
     }
 
-    public function toggleDone($id)
+    public function changeDone($id, Request $request): JsonResponse
     {
+        $request->validate([
+            'done' => 'required|in:0,1',
+        ]);
+
         $user = auth()->user();
 
         $todo = $user->todos()->where('id', $id)->first();
@@ -86,7 +90,7 @@ class TodoController extends Controller
         }
 
         $result = $todo->update([
-            'done' => !$todo->done
+            'done' => $request->done
         ]);
 
         return response()->json(['status' => $result, 'todo' => $todo]);
